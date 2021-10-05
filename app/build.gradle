@@ -1,0 +1,84 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+android {
+    compileSdk 31
+
+    signingConfigs {
+        releaseConfig {
+            storeFile file('key')
+            storePassword "pass"
+            keyAlias "alias"
+            keyPassword "pass"
+        }
+
+        QA {
+            storeFile file('qa_key')
+            storePassword "pass"
+            keyAlias "alias"
+            keyPassword "pass"
+        }
+        PROD {
+            storeFile file('prod_key')
+            storePassword "pass"
+            keyAlias "alias"
+            keyPassword "pass"
+        }
+        DEV {
+            storeFile file('dev_key')
+            storePassword "pass"
+            keyAlias "alias"
+            keyPassword "pass"
+        }
+
+    }
+
+    productFlavors {
+        QA {
+            applicationId "QA.signed.app"
+        }
+        PROD{
+            applicationId "PROD.signed.app"
+        }
+        DEV {
+            applicationId "DEV.signed.app"
+        }
+    }
+    defaultConfig {
+        applicationId "com.example.ques6ex1"
+        minSdk 21
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.releaseConfig
+        }
+
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'com.google.android.material:material:1.4.0'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+}
